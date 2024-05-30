@@ -1,0 +1,5 @@
+{% macro generate_integer_values(from, to) %}
+(VALUES
+{% for i in range(from, to + 1) -%} {{i}} {{ "," if not loop.last else "" }}
+{%- endfor %} )
+{% endmacro %}

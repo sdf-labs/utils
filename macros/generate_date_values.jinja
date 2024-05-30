@@ -1,0 +1,54 @@
+{#
+    Macro: generate_date_strings(from, to)
+
+    This macro generates a SQL VALUES clause with a list of date strings. The date strings are generated for each day 
+    in the range from the 'from' date to the 'to' date, inclusive.
+
+    Parameters:
+    - from: The start date of the range, as a string in 'YYYY-MM-DD' format.
+    - to: The end date of the range, as a string in 'YYYY-MM-DD' format.
+
+    Returns:
+    A string representing a SQL VALUES clause with a list of date strings.
+
+    Example usage:
+    {{generate_date_strings('2022-01-01', '2022-01-03')}}
+
+    This will generate:
+    (VALUES '2022-01-01', '2022-01-02', '2022-01-03')
+
+#}
+
+{% macro generate_date_strings(from, to) %}
+(VALUES
+{% for i in __generate_date_strings__('2022-01-01', '2022-01-03') -%} '{{i}}' {{ "," if not loop.last else "" }}
+{%- endfor %} )
+{% endmacro %}
+
+
+{#
+    Macro: generate_date_values(from, to)
+
+    This macro generates a SQL SELECT statement that produces a single column of dates. 
+    The dates are generated for each day in the range from the 'from' date to the 'to' date, inclusive.
+
+    Parameters:
+    - from: The start date of the range, as a string in 'YYYY-MM-DD' format.
+    - to: The end date of the range, as a string in 'YYYY-MM-DD' format.
+
+    Returns:
+    A string representing a SQL SELECT statement.
+
+    Example usage:
+    {{generate_date_values('2022-01-01', '2022-01-03')}}
+
+    This will generate:
+    (SELECT cast(value as date) as "date" FROM (VALUES '2022-01-01', '2022-01-02', '2022-01-03') as dates(value))
+#}
+
+{% macro generate_date_values(from, to) %}
+(SELECT cast(value as date) as "date" FROM {{ generate_date_strings(from, to) }} as dates(value))
+{% endmacro %}
+
+
+
