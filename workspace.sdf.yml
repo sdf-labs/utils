@@ -1,6 +1,8 @@
 workspace:
   name: sdf_utils
   edition: "1.2"
+  description: >
+    Official utilities library for SDF.
   includes:
     - path: macros/*.jinja
       type: metadata
