@@ -148,4 +148,4 @@ Generates a surrogate key for a given list of fields. The surrogate key is a uni
 
   Without the delimiter, the inputs `firstName` = 'John Smith'  and `lastName` = '', and firstName = 'John ' and lastName = 'Smith' would generate the same hash with generate_surrogate_key(["firstName", "lastName"]). The delimiter prevents this collision
 
-  Thanks @sophieml from Obie for the delimiter improvement ^ <3
+  Thanks [@sophieml](https://github.com/sophieml) from Obie for the delimiter improvement ^ <3
