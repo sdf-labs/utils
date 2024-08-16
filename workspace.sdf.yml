@@ -4,5 +4,4 @@ workspace:
   description: >
     Official utilities library for SDF.
   includes:
-    - path: macros/*.jinja
-      type: metadata
+    - path: macros
